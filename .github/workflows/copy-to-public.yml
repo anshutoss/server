@@ -1,0 +1,21 @@
+name: "server"
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  copy-to-branches:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pushes to another repository
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        source-directory: '.'
+        destination-github-username: 'anshutoss'
+        destination-repository-name: 'server'
+        user-email: anshu100anand@gmail.com
+        target-branch: main
